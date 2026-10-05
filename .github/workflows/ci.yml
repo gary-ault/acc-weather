@@ -1,0 +1,26 @@
+name: Validate and build
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        ruby: ['3.2', '3.3']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - run: ruby test/weather_test.rb
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/package_plugin.py --plugin acc-weather
+      - run: python test/package_test.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: acc-weather-${{ matrix.os }}-ruby-${{ matrix.ruby }}
+          path: dist/acc-weather.tar.gz

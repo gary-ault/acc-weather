@@ -1,0 +1,4 @@
+[
+  {"exec": "check_weather_wind.rb", "args": [""], "skip_arguments": true, "allow_shell": false},
+  {"exec": "metrics_weather_wind.rb", "args": [""], "skip_arguments": true, "allow_shell": false}
+]

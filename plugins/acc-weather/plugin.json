@@ -1,0 +1,14 @@
+{
+  "pluginName": "acc-weather",
+  "version": "0.1.0",
+  "os": "all",
+  "platform": "all",
+  "dirs": {
+    "bin": [
+      "plugins/acc-weather/bin/check_weather_wind.rb",
+      "plugins/acc-weather/bin/metrics_weather_wind.rb",
+      "plugins/acc-weather/bin/weather_lib.rb"
+    ],
+    "allow_list": ["plugins/acc-weather/allow_list/check-allow-list.json"]
+  }
+}
