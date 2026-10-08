@@ -10,5 +10,5 @@ exit /b 2
 python tools\package_plugin.py --plugin acc-weather
 exit /b %ERRORLEVEL%
 :signed
-python tools\package_plugin.py --plugin acc-weather --create-signing-key
+python tools\package_plugin.py --plugin acc-weather --output-dir dist/signed --create-signing-key
 exit /b %ERRORLEVEL%

@@ -1,34 +1,38 @@
-# Validation record
+# Temperature-only validation
 
-Initial local validation: 2026-10-05 UTC (2026-10-04 America/Chicago).
+Version: 0.2.0. Rebuild date: 2026-10-07 (America/Chicago).
 
-- Windows portable Ruby 3.3.12: 17 tests, 147 assertions, zero failures/errors.
-- Tests cover nearest-station selection, distance limits, station overrides,
-  all supported input/output wind units, inclusive warning/critical boundaries,
-  explicit calm wind, missing/invalid values, stale/future timestamps, HTTP errors,
-  timeouts, TLS settings, malformed JSON, metric stdout isolation, CLI validation,
-  and real entry-point help/failure exit codes.
-- Unsigned archive contents, source bytes, executable modes and allow list passed
-  `python test/package_test.py`.
-- Actual NWS point/station/observation requests succeeded through the new Ruby
-  code at the public example coordinates `39.7456,-97.0892`.
-- Selected station: KMYZ, approximately 41.0 km from that point.
-- Observation: `2026-10-05T01:35:00Z`, sustained wind `3.355404 mph`.
+The two temperature scripts from source commit `a3726ac` are preserved unchanged.
+The bin directory, manifest and allow list are restricted to those scripts.
 
-Actual metric stdout:
+## Automated checks
 
-```text
-weather.nws_example.wind_speed_mph 3.355404 1791164100
-```
+Local Windows Ruby 3.3.12 result: **14 tests, 183 assertions, zero failures or
+errors**. Unsigned archive validation passed; the signed build's signature was
+verified and its inner payload matched the tested unsigned archive byte for byte.
 
-Actual event output with deliberately low **test-only** thresholds:
+`ruby test/temperature_test.rb` executes the actual scripts in child Ruby
+processes, intercepting HTTP only in the test process. It covers high/low
+inclusive thresholds, critical precedence, station normalization and endpoint,
+exact metric output and observation timestamp, zero/negative temperatures,
+required parameters, threshold ordering, unsupported metric arguments, missing
+temperature, bad JSON/timestamps, HTTP 429/503 and timeout failures. Assertions
+check actual process exit codes and empty stdout on errors.
 
-```text
-CRITICAL - ci=nws_example wind_speed=3.36 mph warning=1 critical=2 station=KMYZ distance=41.0km observed=2026-10-05T01:35:00Z age=40.1min
-```
+`python test/package_test.py` verifies that the source bin directory and manifest
+contain exactly the two scripts, archive files match current source bytes,
+executable modes are correct, and the allow list contains only those entry points.
 
-No ServiceNow instance or deployed ACC agent was available for integration testing.
-Instance plugin filters, the agent's embedded Ruby launch behavior, certificate
-trust, and data center CI association still require endpoint acceptance testing.
-The GitHub workflow separately tests ordinary Ruby on Windows and Linux; see
-Actions for the result at the current commit.
+The signed build verifies its signature with the public certificate. Its inner
+archive must exactly match the tested unsigned archive.
+
+GitHub Actions runs tests and package validation on Windows and Linux with Ruby
+3.2 and 3.3. Consult Actions for results at the current commit.
+
+## Limits
+
+There is no deployed ACC agent or ServiceNow instance in this workspace.
+Certificate trust, embedded-Ruby invocation, platform filters, target CI routing
+and metric ingestion require endpoint acceptance. This rebuild preserves the
+supplied scripts' HTTP, freshness and exception behavior as documented in the
+configuration guide.
