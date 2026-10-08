@@ -32,6 +32,9 @@ to find an appropriate station. Select your own ACC proxy agent. The number of
 event instances is configurable; the example uses one above-temperature check
 and one below-temperature check alongside the metric.
 
+The Santa Clara, California demo uses **`KSJC` (San Jose International Airport)**.
+The guide labels the original screenshot's station value as needing correction.
+
 ## Event check
 
 ```sh

@@ -52,16 +52,21 @@ only the station ID: no station name, explanatory sentence, URL, or extra lines.
 | Field | Configuration |
 | --- | --- |
 | Name | Your data center's name |
-| Description | Nearest NWS observation station ID on one line; `KASG` is the screenshot's demo value |
+| Description | Nearest NWS observation station ID on one line; use `KSJC` for this Santa Clara demo |
 | Location | Maintain according to your CMDB requirements; these scripts do not use it to choose a station |
 | Install Status | Installed in the supplied example; maintain according to your CI lifecycle |
 
-![Data Center CI with a single-line KASG station identifier in Description](images/data-center-station-configuration.png)
+For the **Santa Clara, California** demo, use **`KSJC` — San Jose International
+Airport**. The [NWS Santa Clara page](https://forecast.weather.gov/MapClick.php?lat=37.3558&lon=-121.9595)
+uses this station for current conditions. Select a station appropriate to the
+physical location when configuring other data centers.
 
-*The screenshot's CI name and `KASG` value are demo examples, not required values.
-KASG identifies Springdale Municipal in Arkansas; choose the station nearest your
-actual data center rather than copying this value. The blank Location in the
-screenshot is not a recommendation to clear location information.*
+![Data Center CI showing the Description field; use KSJC instead of the original screenshot value](images/data-center-station-configuration.png)
+
+**Screenshot correction:** the original image contains `KASG`. For this Santa
+Clara demo, enter **`KSJC`** instead. The image is retained to show the field's
+location, not the corrected value. The blank Location in the screenshot is not
+a recommendation to clear location information.
 
 ### Find the nearest station
 
@@ -88,7 +93,7 @@ read the station through the **short-description label token**:
 ```
 
 Verify that the field you populated is the one exposed by this token in your
-instance. The resolved command must contain, for example, `--station KASG`, not
+instance. The resolved command must contain, for this demo, `--station KSJC`, not
 an empty value or descriptive text. If Description and Short description are
 different fields in your configuration, align the populated field and token
 mapping before running the policy.

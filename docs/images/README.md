@@ -22,5 +22,7 @@ to select an agent from the reader's own environment.
 The critical parameter is shown as non-mandatory in the parameter screenshots.
 The guide explicitly corrects this to mandatory because the script requires it.
 The screenshot default thresholds are examples and are not universal settings.
-The data center screenshot uses `KASG` as a demo value; readers must choose a
-station for their own physical data center location.
+The data center screenshot still shows the originally supplied `KASG` value.
+The owner corrected the demo location to Santa Clara, California. The guide
+explicitly instructs readers to enter `KSJC` (San Jose International Airport)
+for that demo; the image is retained only to show the Description field.
