@@ -61,12 +61,11 @@ Airport**. The [NWS Santa Clara page](https://forecast.weather.gov/MapClick.php?
 uses this station for current conditions. Select a station appropriate to the
 physical location when configuring other data centers.
 
-![Data Center CI showing the Description field; use KSJC instead of the original screenshot value](images/data-center-station-configuration.png)
+![Data Center CI with KSJC as the only line in Description for the Santa Clara demo](images/data-center-station-configuration.png)
 
-**Screenshot correction:** the original image contains `KASG`. For this Santa
-Clara demo, enter **`KSJC`** instead. The image is retained to show the field's
-location, not the corrected value. The blank Location in the screenshot is not
-a recommendation to clear location information.
+*The updated screenshot shows **`KSJC`** as the only line in Description for the
+Santa Clara demo. The blank Location is not a recommendation to clear location
+information; maintain it according to your CMDB requirements.*
 
 ### Find the nearest station
 
