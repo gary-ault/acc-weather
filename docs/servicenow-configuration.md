@@ -12,8 +12,8 @@ All temperatures and threshold values in this guide are Celsius.
 
 ## 1. Register the plugin
 
-Upload `dist/signed/acc-weather.tar.gz` and register version 0.2.0. Trust the
-accompanying public signing certificate through your normal ACC procedure.
+Upload `dist/signed/acc-weather.tar.gz` and register version 0.2.0. Configure
+signing certificate validation on the executing agent as described below.
 
 | Field | Setting |
 | --- | --- |
@@ -41,6 +41,38 @@ Configure platform applicability on the instance as shown; local build metadata
 does not configure the instance automatically. Associate `acc-weather` with both
 check definitions through their Plugin related list. When upgrading, remove
 superseded definitions from active policies.
+
+### Signing certificate validation
+
+**Normal deployment:** keep plugin signature validation enabled in the executing
+agent's `acc.yml`:
+
+```yaml
+verify-plugin-signature: true
+```
+
+Make the matching public certificate (`dist/signed/sign.crt`) trusted by that
+agent, following ServiceNow's [Secure a custom plugin with a certificate](https://www.servicenow.com/docs/r/it-operations-management/agent-client-collector/acc-self-sign-certificate.html)
+and its linked signing/certificate distribution instructions for your release.
+For proxy execution, configure the proxy agent you selected. A successful local
+signed build verifies the archive but does not install certificate trust on ACC.
+Distribute only the public certificate; keep the private signing key private.
+
+**Testing only:** temporarily bypass plugin signature validation by setting this
+top-level option in that test agent's `acc.yml`:
+
+```yaml
+verify-plugin-signature: false
+```
+
+Restart the ACC service to apply the configuration change. This setting affects
+plugin validation across that agent, not just this demo. After testing, configure
+certificate trust, restore `verify-plugin-signature: true`, restart ACC, and
+test the signed plugin again. Do not use the bypass in production.
+
+See ServiceNow's [acc.yml configuration options](https://www.servicenow.com/docs/r/it-operations-management/agent-client-collector/acc-yml-options.html).
+The separate `insecure-skip-tls-verify` option controls MID Server TLS validation;
+leave it unchanged for this procedure.
 
 ## 2. Configure each data center CI for the demo
 

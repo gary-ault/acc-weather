@@ -121,6 +121,9 @@ The convenience signed build reuses `.keys/` or creates a local test key and
 certificate. Signing requires Python `cryptography`; OpenSSL can also perform the
 signing operation. Private keys and build output are excluded from Git. Import the
 public certificate using the ACC trust procedure; retain signature verification.
+See [signing certificate validation](docs/servicenow-configuration.md#signing-certificate-validation)
+for ServiceNow documentation and the testing-only `acc.yml` bypass, including
+restoring validation after the demo.
 
 One payload serves both operating systems. The manifest is local build metadata;
 configure compatible platform filters and Ruby execution on the instance.
