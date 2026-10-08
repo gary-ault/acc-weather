@@ -21,11 +21,16 @@ No additional runtime gems or shell wrappers are packaged. See the
 for plugin registration, check definitions and their parameters, data center CI
 selection, proxy settings, and policy check instances.
 
-The documented example stores the NWS station ID in the target data center CI's
-**Short description** and passes it using
-`--station {{.labels.params_ci_short_description}}`. Select your own ACC proxy
-agent. The number of event instances is configurable; the example uses one
-above-temperature check and one below-temperature check alongside the metric.
+For the demo, store the nearest NWS observation station's ID as the only line in
+the data center CI's **Description** field. The supplied check templates use
+`--station {{.labels.params_ci_short_description}}`; verify that this label maps
+to the field populated in your instance. The guide includes the CI screenshot
+and [station-selection instructions](docs/servicenow-configuration.md#find-the-nearest-station).
+Use the [official NWS station directory](https://forecast.weather.gov/xml/current_obs/)
+or its [complete current-observation station index](https://forecast.weather.gov/xml/current_obs/index.xml)
+to find an appropriate station. Select your own ACC proxy agent. The number of
+event instances is configurable; the example uses one above-temperature check
+and one below-temperature check alongside the metric.
 
 ## Event check
 

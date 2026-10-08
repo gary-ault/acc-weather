@@ -42,23 +42,62 @@ does not configure the instance automatically. Associate `acc-weather` with both
 check definitions through their Plugin related list. When upgrading, remove
 superseded definitions from active policies.
 
-## 2. Set the station on each target CI
+## 2. Configure each data center CI for the demo
 
-In this configuration, each monitored **Data Center** CI's **Short description**
-contains its NWS station identifier, for example `KSJC`. Use only the station ID
-in that field, without a sentence or additional text.
+Open each **Data Center** CI (`cmdb_ci_datacenter`) selected by the weather policy.
+For this demo, enter the identifier of the nearest **National Weather Service
+(NWS) observation station** in the **Description** field as a single line. Store
+only the station ID: no station name, explanatory sentence, URL, or extra lines.
 
-The command prefixes read the value using:
+| Field | Configuration |
+| --- | --- |
+| Name | Your data center's name |
+| Description | Nearest NWS observation station ID on one line; `KASG` is the screenshot's demo value |
+| Location | Maintain according to your CMDB requirements; these scripts do not use it to choose a station |
+| Install Status | Installed in the supplied example; maintain according to your CI lifecycle |
+
+![Data Center CI with a single-line KASG station identifier in Description](images/data-center-station-configuration.png)
+
+*The screenshot's CI name and `KASG` value are demo examples, not required values.
+KASG identifies Springdale Municipal in Arkansas; choose the station nearest your
+actual data center rather than copying this value. The blank Location in the
+screenshot is not a recommendation to clear location information.*
+
+### Find the nearest station
+
+Use these official NWS resources:
+
+- [Observation station directory by state or territory](https://forecast.weather.gov/xml/current_obs/): select the data center's state or territory and find nearby observation locations.
+- [Complete station index for the NWS current-observation directory (XML)](https://forecast.weather.gov/xml/current_obs/index.xml): a searchable/downloadable list containing station IDs, names, states, and coordinates.
+- [NWS station information search](https://www.weather.gov/tg/siteloc): look up a station identifier and its coordinates, or list stations by state or country.
+
+Compare station locations with the physical data center location to select the
+nearest station. Before using it, test the temperature check with that identifier
+and confirm that NWS returns an observation with a temperature value. Inclusion
+in a directory alone does not confirm current temperature availability in the
+API. If the nearest station has no usable observation, select a suitable nearby
+reporting station and record that choice for the demo.
+
+### Connect the CI field to the check commands
+
+The screenshot labels the field **Description**. The supplied check definitions
+read the station through the **short-description label token**:
 
 ```text
 {{.labels.params_ci_short_description}}
 ```
 
-Choose a station appropriate to each data center. The scripts do not query the
-CMDB or derive a station from coordinates or an address. The CI field supplies
-the already-selected station. If your organization uses Short description for
-another purpose, establish a different station-field mapping and update the
-command template accordingly before deploying this example.
+Verify that the field you populated is the one exposed by this token in your
+instance. The resolved command must contain, for example, `--station KASG`, not
+an empty value or descriptive text. If Description and Short description are
+different fields in your configuration, align the populated field and token
+mapping before running the policy.
+
+The scripts do not query the CMDB or derive a station from coordinates or an
+address. ServiceNow supplies the already-selected identifier. Using Description
+for the station is a **demo convention**. If your organization needs that field
+for descriptive text, use a dedicated station field and update the label mapping
+and both command prefixes accordingly.
 
 ## 3. Create the metric check definition
 

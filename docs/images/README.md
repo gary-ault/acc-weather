@@ -7,6 +7,7 @@ editing. Captions distinguish shown settings from recommended corrections.
 | File | Content |
 | --- | --- |
 | `plugin-settings.png` | ACC plugin properties |
+| `data-center-station-configuration.png` | Data Center CI with a single-line station ID in Description |
 | `metric-check-definition.png` | Temperature metric definition and station token |
 | `event-check-definition.png` | Temperature event definition and generated command |
 | `event-parameter-definitions.png` | Four event parameter definitions |
@@ -21,3 +22,5 @@ to select an agent from the reader's own environment.
 The critical parameter is shown as non-mandatory in the parameter screenshots.
 The guide explicitly corrects this to mandatory because the script requires it.
 The screenshot default thresholds are examples and are not universal settings.
+The data center screenshot uses `KASG` as a demo value; readers must choose a
+station for their own physical data center location.
