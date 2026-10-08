@@ -17,7 +17,15 @@ automatic station selection. Supply a station appropriate to the monitored site.
 
 The scripts use Ruby standard libraries and can run with ACC's embedded Ruby.
 No additional runtime gems or shell wrappers are packaged. See the
-[ServiceNow configuration guide](docs/servicenow-configuration.md) for setup.
+[illustrated ServiceNow configuration guide](docs/servicenow-configuration.md)
+for plugin registration, check definitions and their parameters, data center CI
+selection, proxy settings, and policy check instances.
+
+The documented example stores the NWS station ID in the target data center CI's
+**Short description** and passes it using
+`--station {{.labels.params_ci_short_description}}`. Select your own ACC proxy
+agent. The number of event instances is configurable; the example uses one
+above-temperature check and one below-temperature check alongside the metric.
 
 ## Event check
 
