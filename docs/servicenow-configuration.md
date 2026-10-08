@@ -327,8 +327,36 @@ Before publishing, verify:
 6. Events and metrics are associated with the intended data center CI.
 
 Use **Test check** to inspect command output. Publish the policy after completing
-your checks. Confirm observed results and metric ingestion; the supplied form
-screenshots establish configuration examples, not proof of successful execution.
+your checks. Confirm observed results and metric ingestion. The setup screenshots
+show configuration; the example below shows displayed temperature results.
+
+## 9. Verify the results: sample temperature display
+
+The supplied **Data Center** list view shows the configured station IDs beside
+the demo's temperature values in a `temperature_c` column:
+
+![Data Center list showing station IDs and example temperature readings](images/sample-temperature-results.png)
+
+| Data center in the demo | Description / station ID | Displayed temperature |
+| --- | --- | --- |
+| ServiceNow Chicago | `KORD` | 20°C |
+| ServiceNow Headquarters | `KSJC` | 28°C |
+
+These values are a sample snapshot, not expected fixed values or current weather.
+The screenshot illustrates the desired association between each data center,
+its configured station, and a displayed temperature. It does not show observation
+timestamps or the status of the high/low event checks.
+
+After running the policy, inspect the metric result and confirm that the
+temperature belongs to the intended data center and station. Compare the
+observation timestamp with the check result when verifying freshness. Inspect
+event results separately to confirm the configured thresholds and direction.
+
+The scripts emit `weather.temperature_c`; they do not create a CMDB field or
+automatically populate this list column. The screenshot shows the demo's instance
+display configuration. Metric-to-CI association and any mapping or view needed
+to show the `temperature_c` column must be configured in your instance. A working
+metric result can also be verified in your instance's metric view.
 
 ## Runtime and allow-list details
 

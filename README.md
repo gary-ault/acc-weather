@@ -34,6 +34,8 @@ and one below-temperature check alongside the metric.
 
 The Santa Clara, California demo uses **`KSJC` (San Jose International Airport)**.
 The guide's data center screenshot shows `KSJC` entered in Description.
+The [sample result screen](docs/servicenow-configuration.md#9-verify-the-results-sample-temperature-display)
+shows station identifiers and example temperatures beside the demo's data centers.
 
 ## Event check
 

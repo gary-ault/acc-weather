@@ -14,6 +14,7 @@ editing. Captions distinguish shown settings from recommended corrections.
 | `policy-monitored-cis.png` | Data Center CI type on the weather policy |
 | `policy-check-selection.png` | Example metric and two event instances |
 | `low-temperature-check-instance.png` | Example below-temperature instance parameters |
+| `sample-temperature-results.png` | Data Center list with KORD/KSJC and example temperatures |
 
 The proxy-agent screenshot is intentionally excluded because it identifies a
 specific agent. The guide documents its settings in a table with the instruction
